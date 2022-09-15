@@ -38,3 +38,33 @@ f(6)
 x <- seq(-5,5,0.001)
 f(x)
 plot(x,f(x), type = "l")
+
+
+par(mar=c(4,4,0.25,0.25))
+x <- mtcars$wt
+y <- mtcars$mpg
+plot(x,y)
+
+
+par(mar=c(4,4,2,0.25))
+x <- mtcars$wt
+y <- mtcars$mpg
+plot(x,y,
+     pch=17,
+     xlab='weight (1000 lbs)',
+     ylab='Miles per US gallon',
+     main='Our 1st Scatter Plot')
+
+#We can also put everything on a single line, as done below, but the above is easier to read.
+plot(x,y,pch=16,xlab='weight (1000 lbs)',ylab='Miles per US gallon',main='Our 1st Scatter Plot')
+
+
+h <- function(x){sqrt(3-x)}
+h(-4)
+h(5)
+
+w <- function(v){v^2-5*v-6}
+w(-1)
+w(-3)
+w(6)
+w(4)
