@@ -1,0 +1,27 @@
+---
+title: "Day 4 Practice"
+author: "Ben Woodruff"
+date: "9/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## My First Section
+
+Let's make a coding chunk that let's me compute the values of a function. 
+
+```{r}
+f <- function(x){8*x^2-5}
+```
+
+Now that the function is defined, we can compute $f(-2)$ and $f(1)$. 
+
+```{r}
+f(-2)
+f(1)
+```
+
+We obtain $f(-2) = `r f(-2)`$ and  $f(1) = `r f(1)`$. This is an example of how to include computations inline when you are writing. 
