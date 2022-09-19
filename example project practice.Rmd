@@ -1,0 +1,34 @@
+---
+title: "Example Project"
+author: "Ben Woodruff"
+date: '2022-09-19'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction
+I need to add a bit more for an intro.  I'll do that later. 
+
+
+The data frame named “dist” includes the columns (1) “id”, the identification number for your randomly selected bulb, (2) “hours”, the number of hours since the bulb has turned on, (3) “intensity”, the lumen output of the bulb, and (4) “percent_intensity”, the bulb intensity as a percent of the original lumen.
+
+We'll load the data below, and view the first 6 lines. 
+
+```{r}
+library(data4led)
+dist <- led_time(2100)
+head(dist)
+```
+
+
+Let's create a histogram of the percent intensity after about 2000 hours for the 212 bulbs that we loaded above. 
+
+```{r}
+hist(dist$percent_intensity)
+```
+
+Notice above that we have a bell curve (expected). The average percent intensity is actually above 100%, at around 101.5%.  The bulbs have gotten slightly brighter after these 2000 hours. 
