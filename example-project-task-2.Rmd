@@ -1,0 +1,59 @@
+---
+title: "Project Example Task 2"
+author: "Ben Woodruff"
+date: '2022-09-26'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Blaha blah blah.. Fill in later.
+
+## Exploring Function f0
+
+For the function $f_0(L; a,b) = \frac{1}{b-a}$, let's explore what happens if we change $a$.  Let's let $b=100$ and change $a$ from 90 to 95, shown in the plot below. 
+
+```{r}
+rm(list=ls())
+f0 <- function(L,a=0,b=1){
+  # Make sure a < b when using this function.
+  
+  out <- rep(-1,length(L))
+  out[(L <= a)] <- 0
+  out[(a < L) & (L < b)] <- 1/(b-a) + 0*L[(a < L) & (L < b)]
+  out[(L >=b)] <-0
+  
+  return(out)
+}
+
+b <- 100
+a1 <- 90
+L1 <- seq(a1,b,0.1)
+y1 <- f0(L1,a1,b)
+
+par(mfrow=c(1,2),mar=c(2.5,2.5,1,0.25))
+plot(L1,y1,type='l',xlim=c(90,110), ylim = c(0,.3))
+
+a2 <- 95
+L2 <- seq(a2,b,0.1)
+y2 <- f0(L2,a2,b)
+
+plot(L2,y2,type='l',xlim=c(90,110))
+mtext('Changing a in f0', side = 3, line = 0)
+
+```
+
+Note that changing $a$ causes the left endpoint of the graph to change, to whatever value we pick for $a$, as well as making the graph taller when $a$ gets closer to $b$. 
+
+
+
+
+
+
+Remember, to get math to show, right click the math on the web, copy the TeX command, and then surround it with dollar signs in your work.  
+
+$f_4(x; a_0,a_1,a_2) = a_0 + a_1x + a_2\ln(0.005x+1)$

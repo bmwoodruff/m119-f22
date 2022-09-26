@@ -29,6 +29,7 @@ Let's create a histogram of the percent intensity after about 2000 hours for the
 
 ```{r}
 hist(dist$percent_intensity)
+hist(dist$percent_intensity, probability = TRUE)
 ```
 
 Notice above that we have a bell curve (expected). The average percent intensity is actually above 100%, at around 101.5%.  The bulbs have gotten slightly brighter after these 2000 hours. 
