@@ -1,0 +1,79 @@
+---
+title: "Example Project Task 3"
+author: "Ben Woodruff"
+date: '2022-09-29'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intro
+
+
+## Calculutaions
+
+When we plot the distribution of intensities after 2000 hours, we get the following plot. 
+
+```{r}
+rm(list=ls())
+library(data4led)
+dist <- led_time(2100)
+hist(dist$percent_intensity,probability = TRUE)
+```
+
+For the function $f_0(L; a,b) = \frac{1}{b-a}$, recall that changing $a$ adjust the starting point on the left of the graph, and chaning $b$ adjusts the starting point on the right of the graph. The plot below illustrates this. 
+
+```{r}
+f0 <- function(x,a=0,b=1){
+  # Make sure a < b when using this function.
+  ifelse((a < x) & (x < b), 1/(b-a) + 0*x[(a < x) & (x < b)],NaN)
+}
+
+#Change these values as needed to compare plots. 
+a1 <- 92
+a2 <- 98
+
+b1 <- 104
+b2 <- 104
+
+x <- seq(min(a1,a2),max(b1,b2),0.1)
+y1 <- f0(x,a1,b1)
+y2 <- f0(x,a2,b2)
+
+xlimits = c(min(a1,a2)-2,max(b1,b2)+2)
+ylimits = c(0,1)
+
+par(mfrow=c(1,2),mar=c(2.5,2.5,2,0.25),oma=c(0,0,1,0))
+plot(x,y1,type='l',xlim=xlimits,ylim=ylimits)
+mtext(paste('a =',a1," and b=",b1), side = 3, line = 0)
+plot(x,y2,type='l',xlim=xlimits,ylim=ylimits)
+mtext(paste('a =',a2," and b=",b2), side = 3, line = 0)
+mtext('Plot of f0',side=3,line=0,outer=TRUE)
+```
+
+Since the histogram starts at around 99.5, and ends after 103.5, let's use these for $a$ and $b$. This gives the graph below. 
+
+```{r}
+f0 <- function(x,a=0,b=1){
+  # Make sure a < b when using this function.
+  1/(b-a) + 0*x
+}
+
+a <- 99.5
+b <- 103.5
+
+x <- seq(a,b,0.01)
+y <- f0(x,a=a,b=b)
+
+par(mfrow=c(1,1),mar=c(2,2,3,0.25),oma=rep(0.5,4))
+hist(dist$percent_intensity,
+     probability = TRUE,
+     xlim=c(98,105),
+     ylim=c(0,0.8),
+     main="Histogram of Lightbulb Intensities \n with fitted f0 function")
+points(x,y,col=2, type = "l")
+```
+
+From the image above, the function $f_0$ doesn't appear to be a great fit, as it's flat, while the histogram is more bell shaped. 
